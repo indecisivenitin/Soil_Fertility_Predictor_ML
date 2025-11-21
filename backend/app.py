@@ -45,7 +45,8 @@ def predict():
 
 if __name__ == "__main__":
     # First train the model if not exists
-    if not os.path.exists("/opt/render/project/src/models/best_soil_model.pkl"):
+        print("Training model for first deploy...")
+    os.system("python train.py")
         print("Training model first...")
         os.system("python backend/train.py")
     app.run(debug=True)
