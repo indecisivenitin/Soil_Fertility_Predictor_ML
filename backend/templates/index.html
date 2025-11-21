@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-50">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Soil Fertility Predict</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .gradient-bg {
+        background: linear-gradient(135deg, #84cc16 0%, #22c55e 100%);
+      }
+    </style>
+  </head>
+  <body class="h-full">
+    <div class="min-h-full flex flex-col">
+      <!-- Header -->
+      <header class="gradient-bg shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <h1 class="text-4xl font-bold text-white text-center">
+            Soil Fertility Predict
+          </h1>
+          <p class="text-green-100 text-center mt-2 text-lg">
+            AI-Powered Soil Health Analysis System
+          </p>
+        </div>
+      </header>
+
+      <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid lg:grid-cols-2 gap-10">
+          <!-- Form -->
+          <div
+            class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100"
+          >
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">
+              Enter Soil Parameters
+            </h2>
+
+            <form method="POST" action="/predict" class="space-y-5">
+              <div class="grid md:grid-cols-2 gap-5">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700"
+                    >NO₃-N (ppm)</label
+                  >
+                  <input
+                    name="NO3"
+                    type="number"
+                    step="0.01"
+                    required
+                    class="mt-1 block w-full rounded-lg border border-gray-300 py-3 px-4 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-150 disabled:opacity-50"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700"
+                    >NH₄-N (ppm)</label
+                  >
+                  <input
+                    name="NH4"
+                    type="number"
+                    step="0.01"
+                    required
+                    class="mt-1 block w-full rounded-lg border border-gray-300 py-3 px-4 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-150"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700"
+                    >Phosphorus (P) ppm</label
+                  >
+                  <input
+                    name="P"
+                    type="number"
+                    step="0.01"
+                    required
+                    class="mt-1 block w-full rounded-lg border border-gray-300 py-3 px-4 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-150"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700"
+                    >Potassium (K) ppm</label
+                  >
+                  <input
+                    name="K"
+                    type="number"
+                    step="0.01"
+                    required
+                    class="mt-1 block w-full rounded-lg border border-gray-300 py-3 px-4 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-150"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700"
+                    >Sulfate (SO₄) ppm</label
+                  >
+                  <input
+                    name="SO4"
+                    type="number"
+                    step="0.01"
+                    required
+                    class="mt-1 block w-full rounded-lg border border-gray-300 py-3 px-4 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-150"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700"
+                    >Boron (B) ppm</label
+                  >
+                  <input
+                    name="B"
+                    type="number"
+                    step="0.01"
+                    required
+                    class="mt-1 block w-full rounded-lg border border-gray-300 py-3 px-4 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-150"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700"
+                    >Organic Matter (%)</label
+                  >
+                  <input
+                    name="OM"
+                    type="number"
+                    step="0.01"
+                    required
+                    class="mt-1 block w-full rounded-lg border border-gray-300 py-3 px-4 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-150"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700"
+                    >pH</label
+                  >
+                  <input
+                    name="pH"
+                    type="number"
+                    step="0.1"
+                    required
+                    class="mt-1 block w-full rounded-lg border border-gray-300 py-3 px-4 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-150"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700"
+                    >Zinc (Zn) ppm</label
+                  >
+                  <input
+                    name="Zn"
+                    type="number"
+                    step="0.01"
+                    required
+                    class="mt-1 block w-full rounded-lg border border-gray-300 py-3 px-4 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-150"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700"
+                    >Copper (Cu) ppm</label
+                  >
+                  <input
+                    name="Cu"
+                    type="number"
+                    step="0.01"
+                    required
+                    class="mt-1 block w-full rounded-lg border border-gray-300 py-3 px-4 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-150"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700"
+                    >Iron (Fe) ppm</label
+                  >
+                  <input
+                    name="Fe"
+                    type="number"
+                    step="0.01"
+                    required
+                    class="mt-1 block w-full rounded-lg border border-gray-300 py-3 px-4 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-150"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700"
+                    >Calcium (Ca) meq/100g</label
+                  >
+                  <input
+                    name="Ca"
+                    type="number"
+                    step="0.1"
+                    required
+                    class="mt-1 block w-full rounded-lg border border-gray-300 py-3 px-4 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-150"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700"
+                    >Magnesium (Mg) meq/100g</label
+                  >
+                  <input
+                    name="Mg"
+                    type="number"
+                    step="0.1"
+                    required
+                    class="mt-1 block w-full rounded-lg border border-gray-300 py-3 px-4 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-150"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700"
+                    >Sodium (Na) meq/100g</label
+                  >
+                  <input
+                    name="Na"
+                    type="number"
+                    step="0.01"
+                    required
+                    class="mt-1 block w-full rounded-lg border border-gray-300 py-3 px-4 shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition duration-150"
+                  />
+                </div>
+              </div>
+              <div class="text-center mt-6">
+                <a
+                  href="/test-cases"
+                  class="inline-block bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-bold py-3 px-10 rounded-xl hover:from-blue-700 hover:to-cyan-700 transform hover:scale-105 transition shadow-lg"
+                >
+                  View Sample Test Cases
+                </a>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full mt-8 bg-gradient-to-r from-green-600 to-lime-600 text-white font-bold py-4 px-8 rounded-xl hover:from-green-700 hover:to-lime-700 transform hover:scale-105 transition"
+              >
+                Predict Fertility
+              </button>
+            </form>
+          </div>
+
+          <!-- Result -->
+          <div
+            class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 flex flex-col justify-center"
+          >
+            {% if prediction is defined and prediction != None %}
+            <div class="text-center">
+              <h2 class="text-6xl font-bold mb-4">
+                Predicted Vegetation Cover
+              </h2>
+              <div class="text-8xl font-extrabold {{ color }}">
+                {{ prediction }}%
+              </div>
+              <p class="text-3xl font-semibold mt-6 {{ color }}">
+                {{ status }}
+              </p>
+
+              <div class="mt-10 p-6 bg-gray-50 rounded-xl">
+                <p class="text-lg text-gray-700">
+                  Higher % = Richer soil fertility
+                </p>
+              </div>
+            </div>
+            {% elif error %}
+            <div class="text-center text-red-600 text-xl font-semibold">
+              {{ error }}
+            </div>
+            {% else %}
+            <div class="text-center text-gray-500">
+              <h2 class="text-3xl font-bold mb-4">
+                Your Result Will Appear Here
+              </h2>
+              <p class="text-lg">Enter soil values and click Predict</p>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </main>
+
+      <footer class="bg-gray-800 text-white py-8 mt-auto">
+        <div class="text-center">
+          <p class="font-bold text-lg">Soil Fertility Predict</p>
+          <p class="text-green-400 font-semibold mt-3">Developed by:</p>
+          <p class="text-md mt-2 leading-relaxed text-green-200">
+            Nitin • Khushi Kumari • Khushali Tiwari • Hrithik Gupta • Nisha
+            Kumari
+          </p>
+          <p class="text-xs text-gray-400 mt-4">
+            Powered by XGBoost • Flask • Tailwind CSS
+          </p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

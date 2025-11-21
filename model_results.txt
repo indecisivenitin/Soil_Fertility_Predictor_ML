@@ -1,0 +1,9 @@
+Best Model: GradientBoosting
+R² Score: 0.9754
+
+All Results:
+RandomForest: 0.9664
+XGBoost: 0.9736
+GradientBoosting: 0.9754
+LinearRegression: 0.3769
+SVR: 0.0598
