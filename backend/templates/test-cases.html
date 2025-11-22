@@ -1,99 +1,444 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full bg-gray-50">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Test Cases - Soil Fertility Predict</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style> body { font-family: 'Inter', sans-serif; } </style>
-</head>
-<body class="h-full">
-  <div class="min-h-full flex flex-col">
-    <!-- Header -->
-    <header class="bg-gradient-to-r from-green-600 to-lime-600 shadow-lg">
-      <div class="max-w-7xl mx-auto px-6 py-6 text-center">
-        <h1 class="text-4xl font-bold text-white">Sample Test Cases</h1>
-        <p class="text-green-100 mt-2">Click any row → values auto-fill in the main page</p>
-      </div>
-    </header>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Cases - Soil Fertility Predict</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-    <main class="flex-grow max-w-7xl mx-auto px-6 py-10">
-      <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-        <table class="w-full text-sm text-left">
-          <thead class="bg-gradient-to-r from-gray-800 text-white">
-            <tr>
-              <th class="px-6 py-4">Soil Type</th>
-              <th class="px-4 py-4">NO₃</th><th class="px-4 py-4">NH₄</th><th class="px-4 py-4">P</th><th class="px-4 py-4">K</th>
-              <th class="px-4 py-4">SO₄</th><th class="px-4 py-4">B</th><th class="px-4 py-4">OM</th><th class="px-4 py-4">pH</th>
-              <th class="px-4 py-4">Zn</th><th class="px-4 py-4">Cu</th><th class="px-4 py-4">Fe</th><th class="px-4 py-4">Ca</th>
-              <th class="px-4 py-4">Mg</th><th class="px-4 py-4">Na</th><th class="px-6 py-4">Expected %</th>
-              <th class="px-6 py-4">Action</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-200">
-            <tr class="hover:bg-green-50 cursor-pointer" onclick="fillForm([65,15,180,250,55,2.8,6.5,6.7,8.0,4.5,35,22,8.0,0.08])">
-              <td class="px-6 py-4 font-semibold text-green-700">Ultra-Fertile</td>
-              <td class="px-4 py-4">65</td><td>15</td><td>180</td><td>250</td><td>55</td><td>2.8</td><td>6.5</td><td>6.7</td><td>8.0</td><td>4.5</td><td>35</td><td>22</td><td>8.0</td><td>0.08</td>
-              <td class="px-6 py-4 font-bold text-green-600">98–100%</td>
-              <td class="px-6 py-4 text-center"><span class="text-xs bg-green-600 text-white px-3 py-1 rounded-full">Click to Load</span></td>
-            </tr>
-            <tr class="hover:bg-green-50 cursor-pointer" onclick="fillForm([45,10,120,180,40,1.8,4.2,6.5,5.5,2.8,25,15,5.5,0.15])">
-              <td class="px-6 py-4 font-semibold">Very Good</td><td>45</td><td>10</td><td>120</td><td>180</td><td>40</td><td>1.8</td><td>4.2</td><td>6.5</td><td>5.5</td><td>2.8</td><td>25</td><td>15</td><td>5.5</td><td>0.15</td>
-              <td class="font-bold text-green-600">88–94%</td><td class="text-center"><span class="text-xs bg-green-500 text-white px-3 py-1 rounded-full">Click</span></td>
-            </tr>
-            <tr class="hover:bg-yellow-50 cursor-pointer" onclick="fillForm([25,5,70,100,20,0.9,2.8,7.0,2.5,1.2,12,9,3.0,0.25])">
-              <td class="px-6 py-4">Average Soil</td><td>25</td><td>5</td><td>70</td><td>100</td><td>20</td><td>0.9</td><td>2.8</td><td>7.0</td><td>2.5</td><td>1.2</td><td>12</td><td>9</td><td>3.0</td><td>0.25</td>
-              <td class="font-bold text-yellow-600">68–75%</td><td class="text-center"><span class="text-xs bg-yellow-500 text-white px-3 py-1 rounded-full">Click</span></td>
-            </tr>
-            <tr class="hover:bg-orange-50 cursor-pointer" onclick="fillForm([12,2,35,60,10,0.4,1.3,7.6,1.0,0.6,6,5,1.5,0.60])">
-              <td class="px-6 py-4">Needs Improvement</td><td>12</td><td>2</td><td>35</td><td>60</td><td>10</td><td>0.4</td><td>1.3</td><td>7.6</td><td>1.0</td><td>0.6</td><td>6</td><td>5</td><td>1.5</td><td>0.60</td>
-              <td class="font-bold text-orange-600">45–55%</td><td class="text-center"><span class="text-xs bg-orange-500 text-white px-3 py-1 rounded-full">Click</span></td>
-            </tr>
-            <tr class="hover:bg-red-50 cursor-pointer" onclick="fillForm([5,1,15,30,6,0.2,0.7,8.1,0.4,0.3,3,3,0.8,1.20])">
-              <td class="px-6 py-4 text-red-700 font-semibold">Poor Soil</td><td>5</td><td>1</td><td>15</td><td>30</td><td>6</td><td>0.2</td><td>0.7</td><td>8.1</td><td>0.4</td><td>0.3</td><td>3</td><td>3</td><td>0.8</td><td>1.20</td>
-              <td class="font-bold text-red-600">20–35%</td><td class="text-center"><span class="text-xs bg-red-600 text-white px-3 py-1 rounded-full">Click</span></td>
-            </tr>
-            <tr class="hover:bg-red-100 cursor-pointer" onclick="fillForm([3,0.5,8,15,4,0.1,0.4,8.8,0.2,0.1,1,1.5,0.4,3.50])">
-              <td class="px-6 py-4 text-red-800 font-bold">Toxic/Saline</td><td>3</td><td>0.5</td><td>8</td><td>15</td><td>4</td><td>0.1</td><td>0.4</td><td>8.8</td><td>0.2</td><td>0.1</td><td>1</td><td>1.5</td><td>0.4</td><td>3.50</td>
-              <td class="font-bold text-red-700"><15%</td><td class="text-center"><span class="text-xs bg-red-700 text-white px-3 py-1 rounded-full">Click</span></td>
-            </tr>
-          </tbody>
-        </table>
+    <!-- PWA & Dark Mode Support -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#22c55e" />
+
+    <script>
+      tailwind.config = { darkMode: "class" };
+    </script>
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        transition: all 0.4s ease;
+      }
+      .gradient-header {
+        background: linear-gradient(135deg, #84cc16 0%, #22c55e 100%);
+      }
+      .dark .gradient-header {
+        background: linear-gradient(135deg, #1e40af 0%, #10b981 100%);
+      }
+
+      /* Table Styling */
+      table {
+        border-collapse: separate;
+        border-spacing: 0;
+      }
+      th {
+        @apply font-bold text-white uppercase tracking-wider;
+      }
+      td {
+        @apply transition-all duration-300;
+      }
+
+      /* DARK MODE TEXT VISIBILITY FIX — SUPER CLEAN */
+      .dark td,
+      .dark th,
+      .dark p,
+      .dark a,
+      .dark h1,
+      .dark h2,
+      .dark h3,
+      .dark span {
+        color: #f1f5f9 !important; /* Very light gray — perfect readability */
+      }
+
+      .dark .text-green-100 {
+        color: #d1fae5 !important;
+      }
+      .dark .text-green-400 {
+        color: #6ee7b7 !important;
+      }
+      .dark .text-green-600 {
+        color: #34d399 !important;
+      }
+      .dark .text-yellow-600 {
+        color: #fbbf24 !important;
+      }
+      .dark .text-orange-600 {
+        color: #fb923c !important;
+      }
+      .dark .text-red-600,
+      .dark .text-red-700 {
+        color: #f87171 !important;
+      }
+
+      .dark tr:hover td {
+        background-color: rgba(
+          16,
+          185,
+          129,
+          0.15
+        ) !important; /* Emerald hover */
+      }
+
+      /* Hover Effects */
+      tr:hover td {
+        @apply bg-opacity-10;
+      }
+      .dark tr:hover td {
+        @apply bg-gray-700;
+      }
+    </style>
+  </head>
+
+  <body
+    class="min-h-screen flex flex-col bg-white dark:bg-[#0a0e17] transition-colors duration-500"
+  >
+    <div class="flex-1 flex flex-col">
+      <!-- Header -->
+      <header class="gradient-header shadow-2xl">
+        <div class="max-w-7xl mx-auto px-6 py-8 text-center">
+          <h1 class="text-4xl md:text-5xl font-bold text-white">
+            Sample Test Cases
+          </h1>
+          <p class="text-green-100 dark:text-emerald-200 mt-3 text-lg">
+            Click any row → values auto-fill in main page
+          </p>
+        </div>
+      </header>
+
+      <!-- Dark Mode Toggle (Same sliding one from main page) -->
+      <div class="fixed top-4 right-4 sm:top-6 sm:right-6 z-50">
+        <button
+          onclick="toggleTheme()"
+          class="relative w-16 h-9 sm:w-20 sm:h-10 rounded-full bg-gray-300 dark:bg-emerald-600 transition-all duration-500 shadow-xl hover:shadow-2xl active:scale-95"
+        >
+          <div
+            id="toggleKnob"
+            class="absolute top-1 left-1 w-7 h-7 sm:w-8 sm:h-8 bg-white dark:bg-gray-900 rounded-full transition-all duration-500 flex items-center justify-center shadow-lg"
+          >
+            <svg
+              class="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500 sun-icon"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+              />
+            </svg>
+            <svg
+              class="w-5 h-5 sm:w-6 sm:h-6 text-gray-300 moon-icon hidden"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
+              />
+            </svg>
+          </div>
+        </button>
       </div>
 
-      <div class="text-center mt-8">
-        <a href="/" class="text-lg font-semibold text-blue-600 hover:text-blue-800">
-          Back to Predictor
-        </a>
-      </div>
-    </main>
+      <!-- Main Content -->
+      <main class="flex-grow max-w-7xl mx-auto px-6 py-10 w-full">
+        <div
+          class="bg-white dark:bg-gray-900 rounded-3xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-800"
+        >
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm md:text-base">
+              <thead
+                class="bg-gradient-to-r from-gray-800 to-gray-900 text-white"
+              >
+                <tr>
+                  <th class="px-4 py-5 text-left">Soil Type</th>
+                  <th class="px-3 py-5">NO₃</th>
+                  <th class="px-3 py-5">NH₄</th>
+                  <th class="px-3 py-5">P</th>
+                  <th class="px-3 py-5">K</th>
+                  <th class="px-3 py-5">SO₄</th>
+                  <th class="px-3 py-5">B</th>
+                  <th class="px-3 py-5">OM</th>
+                  <th class="px-3 py-5">pH</th>
+                  <th class="px-3 py-5">Zn</th>
+                  <th class="px-3 py-5">Cu</th>
+                  <th class="px-3 py-5">Fe</th>
+                  <th class="px-3 py-5">Ca</th>
+                  <th class="px-3 py-5">Mg</th>
+                  <th class="px-3 py-5">Na</th>
+                  <th class="px-5 py-5">Expected</th>
+                  <th class="px-5 py-5">Action</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                <!-- Row 1 -->
+                <tr
+                  class="hover:bg-green-50 dark:hover:bg-emerald-900/30 cursor-pointer transition-all"
+                  onclick="fillForm([65,15,180,250,55,2.8,6.5,6.7,8.0,4.5,35,22,8.0,0.08])"
+                >
+                  <td
+                    class="px-4 py-5 font-bold text-green-700 dark:text-emerald-400"
+                  >
+                    Ultra-Fertile
+                  </td>
+                  <td class="px-3 py-5">65</td>
+                  <td>15</td>
+                  <td>180</td>
+                  <td>250</td>
+                  <td>55</td>
+                  <td>2.8</td>
+                  <td>6.5</td>
+                  <td>6.7</td>
+                  <td>8.0</td>
+                  <td>4.5</td>
+                  <td>35</td>
+                  <td>22</td>
+                  <td>8.0</td>
+                  <td>0.08</td>
+                  <td
+                    class="px-5 py-5 font-bold text-green-600 dark:text-emerald-400"
+                  >
+                    98–100%
+                  </td>
+                  <td class="px-5 py-5 text-center">
+                    <span
+                      class="inline-block px-4 py-2 bg-emerald-600 text-white text-xs font-bold rounded-full"
+                      >Load</span
+                    >
+                  </td>
+                </tr>
+                <!-- Row 2 -->
+                <tr
+                  class="hover:bg-green-50 dark:hover:bg-emerald-900/30 cursor-pointer transition-all"
+                  onclick="fillForm([45,10,120,180,40,1.8,4.2,6.5,5.5,2.8,25,15,5.5,0.15])"
+                >
+                  <td class="px-4 py-5 font-semibold">Very Good</td>
+                  <td>45</td>
+                  <td>10</td>
+                  <td>120</td>
+                  <td>180</td>
+                  <td>40</td>
+                  <td>1.8</td>
+                  <td>4.2</td>
+                  <td>6.5</td>
+                  <td>5.5</td>
+                  <td>2.8</td>
+                  <td>25</td>
+                  <td>15</td>
+                  <td>5.5</td>
+                  <td>0.15</td>
+                  <td class="font-bold text-green-600 dark:text-emerald-400">
+                    88–94%
+                  </td>
+                  <td class="text-center">
+                    <span
+                      class="inline-block px-4 py-2 bg-green-600 text-white text-xs font-bold rounded-full"
+                      >Load</span
+                    >
+                  </td>
+                </tr>
+                <!-- Row 3 -->
+                <tr
+                  class="hover:bg-yellow-50 dark:hover:bg-yellow-900/20 cursor-pointer transition-all"
+                  onclick="fillForm([25,5,70,100,20,0.9,2.8,7.0,2.5,1.2,12,9,3.0,0.25])"
+                >
+                  <td class="px-4 py-5">Average Soil</td>
+                  <td>25</td>
+                  <td>5</td>
+                  <td>70</td>
+                  <td>100</td>
+                  <td>20</td>
+                  <td>0.9</td>
+                  <td>2.8</td>
+                  <td>7.0</td>
+                  <td>2.5</td>
+                  <td>1.2</td>
+                  <td>12</td>
+                  <td>9</td>
+                  <td>3.0</td>
+                  <td>0.25</td>
+                  <td class="font-bold text-yellow-600 dark:text-yellow-400">
+                    68–75%
+                  </td>
+                  <td class="text-center">
+                    <span
+                      class="inline-block px-4 py-2 bg-yellow-600 text-white text-xs font-bold rounded-full"
+                      >Load</span
+                    >
+                  </td>
+                </tr>
+                <!-- Row 4 -->
+                <tr
+                  class="hover:bg-orange-50 dark:hover:bg-orange-900/20 cursor-pointer transition-all"
+                  onclick="fillForm([12,2,35,60,10,0.4,1.3,7.6,1.0,0.6,6,5,1.5,0.60])"
+                >
+                  <td class="px-4 py-5">Needs Improvement</td>
+                  <td>12</td>
+                  <td>2</td>
+                  <td>35</td>
+                  <td>60</td>
+                  <td>10</td>
+                  <td>0.4</td>
+                  <td>1.3</td>
+                  <td>7.6</td>
+                  <td>1.0</td>
+                  <td>0.6</td>
+                  <td>6</td>
+                  <td>5</td>
+                  <td>1.5</td>
+                  <td>0.60</td>
+                  <td class="font-bold text-orange-600 dark:text-orange-400">
+                    45–55%
+                  </td>
+                  <td class="text-center">
+                    <span
+                      class="inline-block px-4 py-2 bg-orange-600 text-white text-xs font-bold rounded-full"
+                      >Load</span
+                    >
+                  </td>
+                </tr>
+                <!-- Row 5 -->
+                <tr
+                  class="hover:bg-red-50 dark:hover:bg-red-900/30 cursor-pointer transition-all"
+                  onclick="fillForm([5,1,15,30,6,0.2,0.7,8.1,0.4,0.3,3,3,0.8,1.20])"
+                >
+                  <td
+                    class="px-4 py-5 text-red-700 dark:text-red-400 font-semibold"
+                  >
+                    Poor Soil
+                  </td>
+                  <td>5</td>
+                  <td>1</td>
+                  <td>15</td>
+                  <td>30</td>
+                  <td>6</td>
+                  <td>0.2</td>
+                  <td>0.7</td>
+                  <td>8.1</td>
+                  <td>0.4</td>
+                  <td>0.3</td>
+                  <td>3</td>
+                  <td>3</td>
+                  <td>0.8</td>
+                  <td>1.20</td>
+                  <td class="font-bold text-red-600 dark:text-red-400">
+                    20–35%
+                  </td>
+                  <td class="text-center">
+                    <span
+                      class="inline-block px-4 py-2 bg-red-600 text-white text-xs font-bold rounded-full"
+                      >Load</span
+                    >
+                  </td>
+                </tr>
+                <!-- Row 6 -->
+                <tr
+                  class="hover:bg-red-100 dark:hover:bg-red-900/40 cursor-pointer transition-all"
+                  onclick="fillForm([3,0.5,8,15,4,0.1,0.4,8.8,0.2,0.1,1,1.5,0.4,3.50])"
+                >
+                  <td
+                    class="px-4 py-5 text-red-800 dark:text-red-300 font-bold"
+                  >
+                    Toxic/Saline
+                  </td>
+                  <td>3</td>
+                  <td>0.5</td>
+                  <td>8</td>
+                  <td>15</td>
+                  <td>4</td>
+                  <td>0.1</td>
+                  <td>0.4</td>
+                  <td>8.8</td>
+                  <td>0.2</td>
+                  <td>0.1</td>
+                  <td>1</td>
+                  <td>1.5</td>
+                  <td>0.4</td>
+                  <td>3.50</td>
+                  <td class="font-bold text-red-700 dark:text-red-300">
+                    &lt;15%
+                  </td>
+                  <td class="text-center">
+                    <span
+                      class="inline-block px-4 py-2 bg-red-700 text-white text-xs font-bold rounded-full"
+                      >Load</span
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-     <footer class="bg-gray-800 text-white py-8 mt-auto">
+        <div class="text-center mt-10">
+          <a
+            href="/"
+            class="inline-block px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-bold text-lg rounded-2xl shadow-xl transform hover:scale-105 transition-all duration-300"
+          >
+            ← Back to Predictor
+          </a>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="bg-gray-900 dark:bg-black text-white py-10">
         <div class="text-center">
-          <p class="font-bold text-lg">Soil Fertility Predict</p>
+          <p class="font-bold text-xl">Soil Fertility Predict</p>
           <p class="text-green-400 font-semibold mt-3">Developed by:</p>
-          <p class="text-md mt-2 leading-relaxed text-green-200">
+          <p class="text-lg mt-2 text-green-200">
             Nitin • Khushi Kumari • Khushali Tiwari • Hrithik Gupta • Nisha
             Kumari
           </p>
         </div>
       </footer>
+    </div>
 
-  <script>
-    function fillForm(values) {
-      if (window.opener) {
-        const inputs = window.opener.document.querySelectorAll('input[type="number"]');
-        inputs.forEach((input, i) => {
-          if (values[i] !== undefined) input.value = values[i];
-        });
-        });
-        alert("Test case loaded! Go back and click Predict");
-        window.close();
-      } else {
-        alert("Please open this page from the main predictor!");
+    <!-- Theme Toggle Script (Same as main page) -->
+    <script>
+      function toggleTheme() {
+        const isDark = document.documentElement.classList.toggle("dark");
+        localStorage.setItem("darkMode", isDark);
+        const knob = document.getElementById("toggleKnob");
+        if (isDark) {
+          knob.classList.add("translate-x-7", "sm:translate-x-10");
+          knob.querySelector(".sun-icon").classList.add("hidden");
+          knob.querySelector(".moon-icon").classList.remove("hidden");
+        } else {
+          knob.classList.remove("translate-x-7", "sm:translate-x-10");
+          knob.querySelector(".sun-icon").classList.remove("hidden");
+          knob.querySelector(".moon-icon").classList.add("hidden");
+        }
       }
-    }
-  </script>
-</body>
+
+      // Load theme
+      if (
+        localStorage.getItem("darkMode") === "true" ||
+        (!localStorage.getItem("darkMode") &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+      ) {
+        document.documentElement.classList.add("dark");
+        document
+          .getElementById("toggleKnob")
+          .classList.add("translate-x-7", "sm:translate-x-10");
+        document.querySelector(".sun-icon").classList.add("hidden");
+        document.querySelector(".moon-icon").classList.remove("hidden");
+      }
+
+      function fillForm(values) {
+        if (window.opener) {
+          const inputs = window.opener.document.querySelectorAll(
+            'input[type="number"]'
+          );
+          inputs.forEach((input, i) => {
+            if (values[i] !== undefined) input.value = values[i];
+          });
+          alert("Test case loaded! Go back and click Predict");
+          window.close();
+        } else {
+          alert("Please open this page from the main predictor!");
+        }
+      }
+    </script>
+  </body>
 </html>
