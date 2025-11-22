@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 # ------------------- LOAD MODEL -------------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "models", "best_soil_model.pkl")
+MODEL_PATH = "/opt/render/project/src/models/best_soil_model.pkl"
 
 if not os.path.exists(MODEL_PATH):
     print("Model not found → Training now...")
