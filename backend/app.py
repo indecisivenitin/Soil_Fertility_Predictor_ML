@@ -7,12 +7,13 @@ import base64
 app = Flask(__name__)
 
 # ------------------- LOAD MODEL -------------------
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "models", "best_soil_model.pkl")
 
 if not os.path.exists(MODEL_PATH):
     print("Model not found → Training now...")
-    os.system("python backend/train.py")
+    TRAIN_PATH = os.path.join(BASE_DIR, "train.py")
+    os.system(f"python {TRAIN_PATH}")
 
 model = joblib.load(MODEL_PATH)
 print("Model loaded → Ready for predictions!")
