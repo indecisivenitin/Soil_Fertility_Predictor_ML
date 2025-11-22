@@ -119,6 +119,7 @@ def generate_pdf(features, pred_pct, status, recommendation):
     buffer.close()
     return f"data:application/pdf;base64,{pdf_base64}"
 
+
 # ------------------- ROUTES -------------------
 @app.route("/")
 def home():
@@ -132,10 +133,13 @@ def test_cases():
 def manifest():
     return send_from_directory('../static', 'manifest.json')
 
+
+# ------------------- PREDICTION -------------------
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
-        features = [
+        # 14 direct inputs from form
+        inputs = [
             float(request.form['NO3']),
             float(request.form['NH4']),
             float(request.form['P']),
@@ -152,7 +156,29 @@ def predict():
             float(request.form['Na'])
         ]
 
-        prediction_pct = round(float(model.predict([features])[0]), 2)
+        # ------------------------------
+        # ADD ENGINEERED FEATURES HERE
+        # ------------------------------
+        NO3, NH4, P, K, SO4, B, OM, pH, Zn, Cu, Fe, Ca, Mg, Na = inputs
+
+        # Feature-engineered values
+        N = NO3 + NH4
+        NPK_Sum = N + P + K
+        Base_Saturation = Ca + Mg + K - Na
+        Micronutrient_Score = Zn + Cu + Fe + B
+
+        # Final input list to model
+        final_features = inputs + [
+            N,
+            NPK_Sum,
+            Base_Saturation,
+            Micronutrient_Score
+        ]
+
+        # ------------------------------
+        # PREDICT
+        # ------------------------------
+        prediction_pct = round(float(model.predict([final_features])[0]), 2)
 
         if prediction_pct >= 90:
             status, color = "Ultra Fertile", "text-emerald-600 dark:text-emerald-400"
@@ -165,20 +191,23 @@ def predict():
         else:
             status, color = "Poor / Deficient", "text-red-600 dark:text-red-400"
 
-        recommendation = generate_recommendation(features, prediction_pct)
-        pdf_report = generate_pdf(features, prediction_pct, status, recommendation)
+        recommendation = generate_recommendation(inputs, prediction_pct)
+        pdf_report = generate_pdf(inputs, prediction_pct, status, recommendation)
 
-        return render_template('index.html',
-                               prediction=prediction_pct,
-                               status=status,
-                               color=color,
-                               recommendation=recommendation,
-                               pdf_report=pdf_report,
-                               features=features)
+        return render_template(
+            'index.html',
+            prediction=prediction_pct,
+            status=status,
+            color=color,
+            recommendation=recommendation,
+            pdf_report=pdf_report,
+            features=inputs
+        )
 
     except Exception as e:
         print("ERROR:", str(e))
         return render_template('index.html', error="Invalid input! Please fill all fields correctly.")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
