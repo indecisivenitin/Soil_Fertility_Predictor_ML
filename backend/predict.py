@@ -18,6 +18,7 @@ if not os.path.exists(MODEL_PATH):
     if result != 0:
         raise Exception("Training failed!")
     print("MODEL TRAINED & SAVED SUCCESSFULLY")
+    print("Moving with next calculations")
 
 # Now safely load the model
 model = joblib.load(MODEL_PATH)
